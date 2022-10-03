@@ -20,7 +20,24 @@ function QuestionForm(props) {
   function handleSubmit(event) {
     event.preventDefault();
     console.log(formData);
+  const{answer1,answer2,answer3,answer4,prompt,correctIndex}=formData;
+  const answers=[answer1,answer2,answer3,answer4];
+  let myAnswer=answers.every(str=>str !=="") && prompt !=="";
+
+
+fetch("http://localhost:4000/questions",{
+method:"POST",
+header:{"Content-Type":"application/json"},
+body:JSON.stringify({"prompt":prompt,
+"answers":answers,"correctIndex":correctIndex
+
+})
+
+
+})
+
   }
+
 
   return (
     <section>
@@ -91,3 +108,7 @@ function QuestionForm(props) {
 }
 
 export default QuestionForm;
+
+
+
+
